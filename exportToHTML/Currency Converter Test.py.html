@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Currency Converter Test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Currency Converter Test.py</font>
+</center></td></tr></table>
+<pre><span class="s0"># Currency converter</span>
+
+<span class="s2">import </span><span class="s1">requests</span>
+
+<span class="s1">print(</span><span class="s3">&quot;Currency Converter&quot;</span><span class="s1">)</span>
+<span class="s1">print(</span><span class="s3">&quot;Convert between the currencies of the world in real time!&quot;</span><span class="s1">)</span>
+
+<span class="s1">location = input(</span><span class="s3">&quot;Currency Location: &quot;</span><span class="s1">)</span>
+<span class="s1">destination = input(</span><span class="s3">&quot;Currency Destination: &quot;</span><span class="s1">)</span>
+
+<span class="s2">while True</span><span class="s1">:</span>
+    <span class="s2">try</span><span class="s1">:</span>
+        <span class="s1">amount = float(input(</span><span class="s3">&quot;Conversion Amount: &quot;</span><span class="s1">))</span>
+    <span class="s2">except</span><span class="s1">:</span>
+        <span class="s1">print(</span><span class="s3">&quot;The conversion amount must be a numerical value!&quot;</span><span class="s1">)</span>
+        <span class="s2">continue</span>
+
+    <span class="s2">if </span><span class="s1">amount &lt; </span><span class="s4">0</span><span class="s1">:</span>
+        <span class="s1">print(</span><span class="s3">&quot;The conversion amount must be greater than 0&quot;</span><span class="s1">)</span>
+        <span class="s2">continue</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">break</span>
+
+<span class="s1">url = </span><span class="s3">&quot;https://api.apilayer.com/fixer/convert?to=&quot; </span><span class="s1">+ destination + </span><span class="s3">&quot;&amp;from=&quot; </span><span class="s1">+ location + </span><span class="s3">&quot;&amp;amount=&quot; </span><span class="s1">+ str(amount)</span>
+
+<span class="s1">payload = {}</span>
+<span class="s1">headers = {</span>
+    <span class="s3">&quot;apikey&quot;</span><span class="s1">: </span><span class="s3">&quot;2Vu3M0UIPDO6cdUSJFLbEJ0mlK0V3anK&quot;</span>
+<span class="s1">}</span>
+
+<span class="s1">response = requests.request(</span><span class="s3">&quot;GET&quot;</span><span class="s2">, </span><span class="s1">url</span><span class="s2">, </span><span class="s1">headers=headers</span><span class="s2">, </span><span class="s1">data=payload)</span>
+
+<span class="s1">status_code = response.status_code</span>
+
+<span class="s2">if </span><span class="s1">status_code != </span><span class="s4">200</span><span class="s1">:</span>
+    <span class="s1">print(</span><span class="s3">&quot;Uh oh, there was a problem. Please try again later&quot;</span><span class="s1">)</span>
+    <span class="s1">quit()</span>
+
+<span class="s1">result = response.json()</span>
+
+<span class="s1">print(</span><span class="s3">&quot;Result: &quot; </span><span class="s1">+ str(result))</span>
+</pre>
+</body>
+</html>
